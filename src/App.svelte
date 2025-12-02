@@ -4,6 +4,10 @@
     Smartphone,
     Brain,
     Blocks,
+    Menu,
+    X,
+    Github,
+    Linkedin,
     Mail,
     ChevronDown,
     Sparkles,
@@ -14,7 +18,6 @@
     ArrowUp
   } from '@lucide/svelte';
   import { onMount } from 'svelte';
-  import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Button, Card, Badge, Footer, FooterCopyright } from 'flowbite-svelte';
 
   let isMenuOpen = false;
   let showScrollTop = false;
@@ -41,42 +44,69 @@
   }
 </script>
 
-<div class="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white relative overflow-hidden">
+<div class="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white relative overflow-hidden">
   <!-- Animated background -->
   <div class="fixed inset-0 overflow-hidden pointer-events-none">
-    <div class="absolute w-96 h-96 bg-cyan-600/20 rounded-full blur-3xl animate-pulse top-0 left-1/4"></div>
-    <div class="absolute w-96 h-96 bg-blue-600/20 rounded-full blur-3xl animate-pulse bottom-0 right-1/4 animation-delay-2000"></div>
-    <div class="absolute w-64 h-64 bg-cyan-600/15 rounded-full blur-3xl animate-pulse top-1/2 left-1/2 animation-delay-4000"></div>
+    <div class="absolute w-96 h-96 bg-purple-600/30 rounded-full blur-3xl animate-pulse top-0 left-1/4"></div>
+    <div class="absolute w-96 h-96 bg-blue-600/30 rounded-full blur-3xl animate-pulse bottom-0 right-1/4 animation-delay-2000"></div>
+    <div class="absolute w-64 h-64 bg-cyan-600/20 rounded-full blur-3xl animate-pulse top-1/2 left-1/2 animation-delay-4000"></div>
   </div>
 
   <!-- Navigation -->
-  <Navbar class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-cyan-500/20">
-    <NavBrand>
-      <Sparkles class="w-8 h-8 text-cyan-400" />
-      <span class="ml-2 text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-        Modern Wizard
-      </span>
-    </NavBrand>
-    <NavHamburger />
-    <NavUl class="text-gray-300">
-      <NavLi on:click={() => scrollToSection('services')} class="cursor-pointer hover:text-cyan-400 transition-colors">服務項目</NavLi>
-      <NavLi on:click={() => scrollToSection('tech')} class="cursor-pointer hover:text-cyan-400 transition-colors">技術堆疊</NavLi>
-      <NavLi on:click={() => scrollToSection('process')} class="cursor-pointer hover:text-cyan-400 transition-colors">服務流程</NavLi>
-      <NavLi on:click={() => scrollToSection('contact')} class="cursor-pointer hover:text-cyan-400 transition-colors">聯絡我們</NavLi>
-    </NavUl>
-  </Navbar>
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-purple-500/20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center space-x-2">
+          <Sparkles class="w-8 h-8 text-purple-400" />
+          <span class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+            Modern Wizard
+          </span>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center space-x-8">
+          <button on:click={() => scrollToSection('services')} class="nav-link">服務項目</button>
+          <button on:click={() => scrollToSection('tech')} class="nav-link">技術堆疊</button>
+          <button on:click={() => scrollToSection('process')} class="nav-link">服務流程</button>
+          <button on:click={() => scrollToSection('contact')} class="nav-link">聯絡我們</button>
+        </div>
+
+        <!-- Mobile menu button -->
+        <button
+          on:click={() => isMenuOpen = !isMenuOpen}
+          class="md:hidden text-purple-400 hover:text-purple-300 transition-colors"
+        >
+          {#if isMenuOpen}
+            <X class="w-6 h-6" />
+          {:else}
+            <Menu class="w-6 h-6" />
+          {/if}
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      {#if isMenuOpen}
+        <div class="md:hidden py-4 space-y-2 border-t border-purple-500/20">
+          <button on:click={() => scrollToSection('services')} class="block w-full text-left px-4 py-2 hover:bg-purple-500/10 rounded transition-colors">服務項目</button>
+          <button on:click={() => scrollToSection('tech')} class="block w-full text-left px-4 py-2 hover:bg-purple-500/10 rounded transition-colors">技術堆疊</button>
+          <button on:click={() => scrollToSection('process')} class="block w-full text-left px-4 py-2 hover:bg-purple-500/10 rounded transition-colors">服務流程</button>
+          <button on:click={() => scrollToSection('contact')} class="block w-full text-left px-4 py-2 hover:bg-purple-500/10 rounded transition-colors">聯絡我們</button>
+        </div>
+      {/if}
+    </div>
+  </nav>
 
   <!-- Hero Section -->
   <section class="relative min-h-screen flex items-center justify-center px-4 pt-16">
     <div class="max-w-5xl mx-auto text-center relative z-10">
       <div class="mb-8 animate-fade-in">
-        <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent">
+        <h1 class="text-6xl sm:text-7xl md:text-8xl font-bold mb-6 neon-text">
           Modern Wizard
         </h1>
-        <div class="h-1 w-32 bg-gradient-to-r from-cyan-500 to-blue-500 mx-auto rounded-full mb-8"></div>
+        <div class="h-1 w-32 bg-gradient-to-r from-purple-500 to-cyan-500 mx-auto rounded-full mb-8"></div>
       </div>
 
-      <p class="text-xl sm:text-2xl md:text-3xl text-cyan-200 mb-4 animate-fade-in-delay-1">
+      <p class="text-xl sm:text-2xl md:text-3xl text-purple-200 mb-4 animate-fade-in-delay-1">
         專業軟體接案服務
       </p>
 
@@ -84,17 +114,16 @@
         區塊鏈應用開發 • 前後端服務 • 跨平台 App • AI 智能解決方案
       </p>
 
-      <Button
+      <button
         on:click={() => scrollToSection('contact')}
-        size="xl"
-        class="bg-gradient-to-r from-cyan-600 to-blue-600 text-white animate-fade-in-delay-3"
+        class="neon-button text-lg px-8 py-4 rounded-full font-semibold animate-fade-in-delay-3"
       >
         開始您的專案
         <Zap class="inline-block w-5 h-5 ml-2" />
-      </Button>
+      </button>
 
       <div class="mt-16 animate-bounce">
-        <ChevronDown class="w-8 h-8 mx-auto text-cyan-400" />
+        <ChevronDown class="w-8 h-8 mx-auto text-purple-400" />
       </div>
     </div>
   </section>
@@ -102,7 +131,7 @@
   <!-- Services Section -->
   <section id="services" class="relative py-20 px-4">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+      <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4 neon-text-small">
         核心服務
       </h2>
       <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
@@ -111,9 +140,9 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- AI Services -->
-        <Card class="bg-slate-900/50 backdrop-blur-sm border-cyan-500/30 hover:border-cyan-500/60 transition-all duration-300">
+        <div class="neon-card group">
           <div class="flex items-center mb-4">
-            <Brain class="w-12 h-12 text-yellow-400" />
+            <Brain class="w-12 h-12 text-yellow-400 group-hover:text-pink-400 transition-colors" />
             <h3 class="text-2xl font-bold ml-4">AI 智能服務</h3>
           </div>
           <p class="text-gray-300 mb-4">
@@ -125,12 +154,12 @@
             <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-yellow-400" /> OpenAI GPT 整合</li>
             <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-yellow-400" /> RAG 檢索增強生成</li>
           </ul>
-        </Card>
+        </div>
 
         <!-- Mobile App -->
-        <Card class="bg-slate-900/50 backdrop-blur-sm border-cyan-500/30 hover:border-cyan-500/60 transition-all duration-300">
+        <div class="neon-card group">
           <div class="flex items-center mb-4">
-            <Smartphone class="w-12 h-12 text-pink-400" />
+            <Smartphone class="w-12 h-12 text-pink-400 group-hover:text-yellow-400 transition-colors" />
             <h3 class="text-2xl font-bold ml-4">跨平台 App 製作</h3>
           </div>
           <p class="text-gray-300 mb-4">
@@ -142,12 +171,12 @@
             <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-pink-400" /> Swift / Kotlin 原生開發</li>
             <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-pink-400" /> App Store 上架協助</li>
           </ul>
-        </Card>
+        </div>
 
         <!-- Full-stack -->
-        <Card class="bg-slate-900/50 backdrop-blur-sm border-cyan-500/30 hover:border-cyan-500/60 transition-all duration-300">
+        <div class="neon-card group">
           <div class="flex items-center mb-4">
-            <Code2 class="w-12 h-12 text-cyan-400" />
+            <Code2 class="w-12 h-12 text-cyan-400 group-hover:text-purple-400 transition-colors" />
             <h3 class="text-2xl font-bold ml-4">前後端服務</h3>
           </div>
           <p class="text-gray-300 mb-4">
@@ -159,24 +188,24 @@
             <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-cyan-400" /> GCP / AWS 雲端部署</li>
             <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-cyan-400" /> 系統整合與優化</li>
           </ul>
-        </Card>
+        </div>
 
         <!-- Blockchain -->
-        <Card class="bg-slate-900/50 backdrop-blur-sm border-cyan-500/30 hover:border-cyan-500/60 transition-all duration-300">
+        <div class="neon-card group">
           <div class="flex items-center mb-4">
-            <Blocks class="w-12 h-12 text-blue-400" />
+            <Blocks class="w-12 h-12 text-purple-400 group-hover:text-cyan-400 transition-colors" />
             <h3 class="text-2xl font-bold ml-4">區塊鏈應用開發</h3>
           </div>
           <p class="text-gray-300 mb-4">
             專精於 Ethereum 區塊鏈生態系統開發
           </p>
           <ul class="space-y-2 text-gray-400">
-            <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-blue-400" /> 智能合約開發 (Solidity)</li>
-            <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-blue-400" /> NFT 平台開發</li>
-            <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-blue-400" /> Web3 整合服務</li>
-            <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-blue-400" /> 區塊鏈應用開發</li>
+            <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-purple-400" /> 智能合約開發 (Solidity)</li>
+            <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-purple-400" /> NFT 平台開發</li>
+            <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-purple-400" /> Web3 整合服務</li>
+            <li class="flex items-center"><CheckCircle2 class="w-4 h-4 mr-2 text-purple-400" /> 區塊鏈應用開發</li>
           </ul>
-        </Card>
+        </div>
       </div>
     </div>
   </section>
@@ -184,7 +213,7 @@
   <!-- Tech Stack Section -->
   <section id="tech" class="relative py-20 px-4 bg-slate-950/50">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+      <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4 neon-text-small">
         技術堆疊
       </h2>
       <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
@@ -193,52 +222,52 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Blockchain Tech -->
-        <Card class="bg-slate-900/30 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all">
-          <h3 class="text-xl font-bold mb-6 text-blue-400">區塊鏈</h3>
+        <div class="tech-card">
+          <h3 class="text-xl font-bold mb-6 text-purple-400">區塊鏈</h3>
           <div class="space-y-3">
-            <Badge color="dark">Ethereum</Badge>
-            <Badge color="dark">Flow</Badge>
-            <Badge color="dark">Solidity</Badge>
-            <Badge color="dark">Web3.js</Badge>
-            <Badge color="dark">Ethers.js</Badge>
+            <div class="tech-badge">Ethereum</div>
+            <div class="tech-badge">Flow</div>
+            <div class="tech-badge">Solidity</div>
+            <div class="tech-badge">Web3.js</div>
+            <div class="tech-badge">Ethers.js</div>
           </div>
-        </Card>
+        </div>
 
         <!-- Frontend/Backend Tech -->
-        <Card class="bg-slate-900/30 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all">
+        <div class="tech-card">
           <h3 class="text-xl font-bold mb-6 text-cyan-400">前後端</h3>
           <div class="space-y-3">
-            <Badge color="dark">Vue.js</Badge>
-            <Badge color="dark">Svelte</Badge>
-            <Badge color="dark">TypeScript</Badge>
-            <Badge color="dark">.NET</Badge>
-            <Badge color="dark">Node.js</Badge>
-            <Badge color="dark">GCP / AWS</Badge>
+            <div class="tech-badge">Vue.js</div>
+            <div class="tech-badge">Svelte</div>
+            <div class="tech-badge">TypeScript</div>
+            <div class="tech-badge">.NET</div>
+            <div class="tech-badge">Node.js</div>
+            <div class="tech-badge">GCP / AWS</div>
           </div>
-        </Card>
+        </div>
 
         <!-- Mobile Tech -->
-        <Card class="bg-slate-900/30 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all">
+        <div class="tech-card">
           <h3 class="text-xl font-bold mb-6 text-pink-400">移動開發</h3>
           <div class="space-y-3">
-            <Badge color="dark">Flutter</Badge>
-            <Badge color="dark">Kotlin Multiplatform</Badge>
-            <Badge color="dark">Swift</Badge>
-            <Badge color="dark">Kotlin</Badge>
+            <div class="tech-badge">Flutter</div>
+            <div class="tech-badge">Kotlin Multiplatform</div>
+            <div class="tech-badge">Swift</div>
+            <div class="tech-badge">Kotlin</div>
           </div>
-        </Card>
+        </div>
 
         <!-- AI Tech -->
-        <Card class="bg-slate-900/30 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all">
+        <div class="tech-card">
           <h3 class="text-xl font-bold mb-6 text-yellow-400">AI / ML</h3>
           <div class="space-y-3">
-            <Badge color="dark">Google Gemini</Badge>
-            <Badge color="dark">Anthropic Claude</Badge>
-            <Badge color="dark">OpenAI GPT</Badge>
-            <Badge color="dark">RAG</Badge>
-            <Badge color="dark">Vector DB</Badge>
+            <div class="tech-badge">Google Gemini</div>
+            <div class="tech-badge">Anthropic Claude</div>
+            <div class="tech-badge">OpenAI GPT</div>
+            <div class="tech-badge">RAG</div>
+            <div class="tech-badge">Vector DB</div>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   </section>
@@ -246,7 +275,7 @@
   <!-- Process Section -->
   <section id="process" class="relative py-20 px-4">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+      <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4 neon-text-small">
         服務流程
       </h2>
       <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
@@ -254,29 +283,29 @@
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card class="bg-slate-900/40 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all">
-          <div class="text-5xl font-bold text-cyan-400 mb-4">01</div>
+        <div class="process-card">
+          <div class="text-5xl font-bold text-purple-400 mb-4">01</div>
           <h3 class="text-xl font-bold mb-2">需求諮詢</h3>
           <p class="text-gray-400">深入了解您的需求與目標，提供專業建議</p>
-        </Card>
+        </div>
 
-        <Card class="bg-slate-900/40 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all">
+        <div class="process-card">
           <div class="text-5xl font-bold text-cyan-400 mb-4">02</div>
           <h3 class="text-xl font-bold mb-2">方案規劃</h3>
           <p class="text-gray-400">制定詳細開發計劃，確認技術架構與時程</p>
-        </Card>
+        </div>
 
-        <Card class="bg-slate-900/40 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all">
-          <div class="text-5xl font-bold text-blue-400 mb-4">03</div>
+        <div class="process-card">
+          <div class="text-5xl font-bold text-pink-400 mb-4">03</div>
           <h3 class="text-xl font-bold mb-2">開發執行</h3>
           <p class="text-gray-400">採用敏捷開發方法，定期同步專案進度</p>
-        </Card>
+        </div>
 
-        <Card class="bg-slate-900/40 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all">
-          <div class="text-5xl font-bold text-blue-400 mb-4">04</div>
+        <div class="process-card">
+          <div class="text-5xl font-bold text-yellow-400 mb-4">04</div>
           <h3 class="text-xl font-bold mb-2">測試交付</h3>
           <p class="text-gray-400">完整測試與驗收，提供後續技術支援</p>
-        </Card>
+        </div>
       </div>
     </div>
   </section>
@@ -284,7 +313,7 @@
   <!-- Why Choose Us Section -->
   <section class="relative py-20 px-4 bg-slate-950/50">
     <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+      <h2 class="text-4xl sm:text-5xl font-bold text-center mb-4 neon-text-small">
         為什麼選擇 ModernWizard
       </h2>
       <p class="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
@@ -292,29 +321,29 @@
       </p>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <Card class="bg-slate-900/30 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all text-center">
-          <Rocket class="w-16 h-16 text-cyan-400 mb-4 mx-auto" />
-          <h3 class="text-xl font-bold mb-3">快速交付</h3>
-          <p class="text-gray-400">
+        <div class="advantage-card">
+          <Rocket class="w-16 h-16 text-purple-400 mb-4 mx-auto" />
+          <h3 class="text-xl font-bold mb-3 text-center">快速交付</h3>
+          <p class="text-gray-400 text-center">
             高效的開發流程，確保專案按時完成並超越期望
           </p>
-        </Card>
+        </div>
 
-        <Card class="bg-slate-900/30 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all text-center">
+        <div class="advantage-card">
           <Shield class="w-16 h-16 text-cyan-400 mb-4 mx-auto" />
-          <h3 class="text-xl font-bold mb-3">品質保證</h3>
-          <p class="text-gray-400">
+          <h3 class="text-xl font-bold mb-3 text-center">品質保證</h3>
+          <p class="text-gray-400 text-center">
             嚴格的程式碼審查與測試，確保產品穩定可靠
           </p>
-        </Card>
+        </div>
 
-        <Card class="bg-slate-900/30 backdrop-blur-sm border-cyan-500/20 hover:border-cyan-500/50 transition-all text-center">
-          <Sparkles class="w-16 h-16 text-cyan-400 mb-4 mx-auto" />
-          <h3 class="text-xl font-bold mb-3">創新技術</h3>
-          <p class="text-gray-400">
+        <div class="advantage-card">
+          <Sparkles class="w-16 h-16 text-pink-400 mb-4 mx-auto" />
+          <h3 class="text-xl font-bold mb-3 text-center">創新技術</h3>
+          <p class="text-gray-400 text-center">
             緊跟技術潮流，運用最新工具打造優質解決方案
           </p>
-        </Card>
+        </div>
       </div>
     </div>
   </section>
@@ -329,47 +358,46 @@
         讓我們一起將您的想法變為現實
       </p>
 
-      <Card class="bg-slate-900/50 backdrop-blur-sm border-cyan-500/30 max-w-2xl mx-auto">
+      <div class="neon-card max-w-2xl mx-auto">
         <p class="text-lg mb-8 text-gray-300">
           無論您的專案大小，我們都樂意提供專業諮詢
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
+          <a
             href="mailto:contact@modernwizard.pro"
-            color="alternative"
-            class="border-cyan-500 text-cyan-300 hover:bg-cyan-500/20"
+            class="neon-button-secondary flex items-center justify-center px-6 py-3 rounded-full"
           >
             <Mail class="w-5 h-5 mr-2" />
             聯絡我們
-          </Button>
+          </a>
         </div>
-      </Card>
+      </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <Footer class="bg-slate-950/80 border-t border-cyan-500/20">
-    <div class="w-full text-center">
+  <footer class="relative py-8 px-4 border-t border-purple-500/20 bg-slate-950/80">
+    <div class="max-w-7xl mx-auto text-center">
       <div class="flex items-center justify-center space-x-2 mb-4">
-        <Sparkles class="w-6 h-6 text-cyan-400" />
-        <span class="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+        <Sparkles class="w-6 h-6 text-purple-400" />
+        <span class="text-xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
           Modern Wizard
         </span>
       </div>
-      <FooterCopyright by="Modern Wizard. 專業軟體接案服務" year={2024} />
+      <p class="text-gray-400 text-sm">
+        © 2024 Modern Wizard. 專業軟體接案服務
+      </p>
     </div>
-  </Footer>
+  </footer>
 
   <!-- Scroll to Top Button -->
   {#if showScrollTop}
-    <Button
+    <button
       on:click={scrollToTop}
-      class="fixed bottom-8 right-8 z-50 animate-fade-in bg-cyan-600 hover:bg-cyan-700"
-      pill
-      size="lg"
+      class="fixed bottom-8 right-8 neon-button-secondary p-3 rounded-full z-50 animate-fade-in"
     >
       <ArrowUp class="w-6 h-6" />
-    </Button>
+    </button>
   {/if}
 </div>
