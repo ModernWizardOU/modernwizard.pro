@@ -16,7 +16,7 @@
     Rocket,
     CheckCircle2,
     ArrowUp
-  } from 'lucide-svelte';
+  } from '@lucide/svelte';
   import { onMount } from 'svelte';
 
   let isMenuOpen = false;
