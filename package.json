@@ -17,6 +17,7 @@
   "devDependencies": {
     "@eslint/js": "^9.39.1",
     "@sveltejs/vite-plugin-svelte": "^4.0.4",
+    "@tailwindcss/postcss": "^4.1.17",
     "autoprefixer": "^10.4.22",
     "eslint": "^9.39.1",
     "flowbite": "^4.0.1",

@@ -19,6 +19,9 @@ devDependencies:
   '@sveltejs/vite-plugin-svelte':
     specifier: ^4.0.4
     version: 4.0.4(svelte@5.45.4)(vite@5.4.21)
+  '@tailwindcss/postcss':
+    specifier: ^4.1.17
+    version: 4.1.17
   autoprefixer:
     specifier: ^10.4.22
     version: 10.4.22(postcss@8.5.6)
@@ -890,7 +893,7 @@ packages:
 
   /@tailwindcss/oxide@4.1.17:
     resolution: {integrity: sha512-F0F7d01fmkQhsTjXezGBLdrl1KresJTcI3DB8EkScCldyKp3Msz4hub4uyYaVnk88BAS1g5DQjjF6F5qczheLA==}
-    engines: {node: '>=14.0.0'}
+    engines: {node: '>= 10'}
     optionalDependencies:
       '@tailwindcss/oxide-android-arm64': 4.1.17
       '@tailwindcss/oxide-darwin-arm64': 4.1.17
@@ -905,13 +908,6 @@ packages:
       '@tailwindcss/oxide-win32-arm64-msvc': 4.1.17
       '@tailwindcss/oxide-win32-x64-msvc': 4.1.17
     dev: true
-    bundledDependencies:
-      - '@napi-rs/wasm-runtime'
-      - '@emnapi/core'
-      - '@emnapi/runtime'
-      - '@tybys/wasm-util'
-      - '@emnapi/wasi-threads'
-      - tslib
 
   /@tailwindcss/postcss@4.1.17:
     resolution: {integrity: sha512-+nKl9N9mN5uJ+M7dBOOCzINw94MPstNR/GtIhz1fpZysxL/4a+No64jCBD6CPN+bIHWFx3KWuu8XJRrj/572Dw==}
@@ -1834,8 +1830,6 @@ packages:
       lightningcss-win32-arm64-msvc: 1.30.2
       lightningcss-win32-x64-msvc: 1.30.2
     dev: true
-    bundledDependencies:
-      - napi-wasm
 
   /locate-character@3.0.0:
     resolution: {integrity: sha512-SW13ws7BjaeJ6p7Q6CO2nchbYEc3X3J6WrmTTDto7yMPqVSZTUyY5Tjbid+Ab8gLnATtygYtiDIJGQRRn2ZOiA==}
